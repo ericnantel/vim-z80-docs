@@ -1,3 +1,1 @@
-ADC z80-docs.txt /*ADC*
-ADD z80-docs.txt /*ADD*
-z80-docs.txt z80-docs.txt /*z80-docs.txt*
+z80-docs z80-docs.txt /*z80-docs*

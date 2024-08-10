@@ -1,4 +1,5 @@
-z80-docs.txt
+z80-docs.txt Plugin Docs for Z80 Assembly Programming
+z80-docs
 
 =================================================================================
 Contents
