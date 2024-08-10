@@ -1,23 +1,23 @@
-|z80-docs.txt| Plugin Docs for Z80 Assembly Programming
-|z80-docs|
+*z80-docs.txt* Plugin Docs for Z80 Assembly Programming
+*z80-docs* *vim-z80-docs*
 
 ================================================================================
 Contents
 
- 1. Instruction set											z80-instruction-set
+ 1. Instruction set ................................... |z80-instruction-set|
 
 
 
 ================================================================================
-							|z80-instruction-set|
+							*z80-instruction-set*
 
 ================================================================================
-							|z80-adc|
+							*z80-adc*
 ADC
 
 
 ================================================================================
-							|z80-add|
+							*z80-add*
 ADD
 
 
