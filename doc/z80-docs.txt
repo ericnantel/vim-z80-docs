@@ -21,4 +21,4 @@ ADC
 ADD
 
 
-vim:tw=78:ts=8:ft=help:norl:
+vim:tw=80:ts=8:ft=help:norl:
