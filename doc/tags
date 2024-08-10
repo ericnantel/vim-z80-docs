@@ -1,2 +1,4 @@
-z80-docs z80-docs.txt /*z80-docs*
-z80-docs.txt z80-docs.txt /*z80-docs.txt*
+z80-docs	z80-docs.txt /*z80-docs*
+z80-instruction-set	z80-docs.txt /*z80-instruction-set*
+z80-add	z80-docs.txt /*z80-add*
+z80-adc	z80-docs.txt /*z80-adc*
