@@ -1,19 +1,84 @@
 *z80-docs.txt* Plugin Docs for Z80 Assembly Programming
 *z80-docs* *vim-z80-docs*
 
+AUTHOR
 ================================================================================
-Contents
+    Eric Nantel
+
+
+TABLE OF CONTENTS
+================================================================================
 
  1. Registers ......................................... |z80-registers|
- 2. Instruction set ................................... |z80-instruction-set|
+  1.1. General-Purpose Registers ...................... |z80-general-registers|
+  1.2. Special-Purpose Registers ...................... |z80-special-registers|
+ 2. Instructions ...................................... |z80-instructions|
 
 
+REGISTERS
 ================================================================================
 							*z80-registers*
 
+GENERAL-PURPOSE REGISTERS
 ================================================================================
-							*z80-instruction-set*
+							*z80-general-registers*
 
+     ------- ------- ------- -------
+    |	A   |	F   |	A'  |	F'  |
+     ------- ------- ------- -------
+    |	B   |	C   |	B'  |	C'  |
+     ------- ------- ------- ------
+    |	D   |	E   |	D'  |	E'  |
+     ------- ------- -------  ------
+    |	H   |	L   |	H'  |	L'  |
+     ------- ------- ------- -------
+Composed of 16 individual 8-bit registers separated in 2 sets: main and
+alternate register set. Registers can be use individually as 8-bit registers 
+or in pairs of 16-bit registers as follow:
+AF, BC, DE, HL, AF', BC', DE', HL'
+
+Register A is known as the accumulator register. It can hold results of 8-bit
+arithmetic or logical operations.
+
+Register F is known as the flag register. It can indicates conditions such as
+a carry or zero flag from a previous arithmetic or logical operation done with
+the accumulator.
+
+SPECIAL-PURPOSE REGISTERS
+================================================================================
+							*z80-special-registers*
+
+     -------  ------
+    |	I   |	R   |
+     -------  ------
+    |	    IX	    |
+     ---------------
+    |	    IY	    |
+     ---------------
+    |	    SP	    |
+     ---------------
+    |	    PC	    |
+     ---------------
+Composed of 2 individual 8-bit registers and 4 individual 16-bit registers.
+
+Register I is the interrupt page address register.
+
+Register R is the memory refresh register.
+
+Register IX and IY are index registers. They can hold a 16-bit base address.
+
+Register SP is the stack pointer register. It holds the 16-bit address of the
+current top of stack.
+
+Register PC is the program counter register. It holds the 16-bit address of
+the current instruction being fetched.
+
+INSTRUCTIONS
+================================================================================
+							*z80-instructions*
+
+
+INSTRUCTION ADC
 ================================================================================
 							*z80-instruction-adc*
 ADC A, (HL)
@@ -28,6 +93,8 @@ ADC HL, DE
 ADC HL, HL
 ADC HL, SP
 
+
+INSTRUCTION ADD
 ================================================================================
 							*z80-instruction-add*
 ADD A, (HL)
@@ -50,6 +117,8 @@ ADD IY, DE
 ADD IY, IY
 ADD IY, SP
 
+
+INSTRUCTION AND
 ================================================================================
 							*z80-instruction-and*
 AND (HL)
@@ -60,6 +129,8 @@ AND r
 AND IXp
 AND IYq
 
+
+INSTRUCTION BIT
 ================================================================================
 							*z80-instruction-bit*
 BIT b, (HL)
@@ -67,6 +138,8 @@ BIT b, (IX + o)
 BIT b, (IY + o)
 BIT b, r
 
+
+INSTRUCTION CALL
 ================================================================================
 							*z80-instruction-call*
 CALL nn
@@ -79,10 +152,14 @@ CALL PE, nn
 CALL PO, nn
 CALL Z, nn
 
+
+INSTRUCTION CCF
 ================================================================================
 							*z80-instruction-ccf*
 CCF
 
+
+INSTRUCTION CP
 ================================================================================
 							*z80-instruction-cp*
 CP (HL)
@@ -93,30 +170,44 @@ CP r
 CP IXp
 CP IYq
 
+
+INSTRUCTION CPD
 ================================================================================
 							*z80-instruction-cpd*
 CPD
 
+
+INSTRUCTION CPDR
 ================================================================================
 							*z80-instruction-cpdr*
 CPDR
 
+
+INSTRUCTION CPI
 ================================================================================
 							*z80-instruction-cpi*
 CPI
 
+
+INSTRUCTION CPIR
 ================================================================================
 							*z80-instruction-cpir*
 CPIR
 
+
+INSTRUCTION CPL
 ================================================================================
 							*z80-instruction-cpl*
 CPL
 
+
+INSTRUCTION DAA
 ================================================================================
 							*z80-instruction-daa*
 DAA
 
+
+INSTRUCTION DEC
 ================================================================================
 							*z80-instruction-dec*
 DEC (HL)
@@ -138,18 +229,26 @@ DEC IYq
 DEC L
 DEC SP
 
+
+INSTRUCTION DI
 ================================================================================
 							*z80-instruction-di*
 DI
 
+
+INSTRUCTION DJNZ
 ================================================================================
 							*z80-instruction-djnz*
 DJNZ o
 
+
+INSTRUCTION EI
 ================================================================================
 							*z80-instruction-ei*
 EI
 
+
+INSTRUCTION EX
 ================================================================================
 							*z80-instruction-ex*
 EX (SP), HL
@@ -158,20 +257,28 @@ EX (SP), IY
 EX AF, AF'
 EX DE, HL
 
+
+INSTRUCTION EXX
 ================================================================================
 							*z80-instruction-exx*
 EXX
 
+
+INSTRUCTION HALT
 ================================================================================
 							*z80-instruction-halt*
 HALT
 
+
+INSTRUCTION IM
 ================================================================================
 							*z80-instruction-im*
 IM 0
 IM 1
 IM 2
 
+
+INSTRUCTION IN
 ================================================================================
 							*z80-instruction-in*
 IN A, (C)
@@ -184,6 +291,8 @@ IN H, (C)
 IN L, (C)
 IN F, (C)
 
+
+INSTRUCTION INC
 ================================================================================
 							*z80-instruction-inc*
 INC (HL)
@@ -205,22 +314,32 @@ INC IYq
 INC L
 INC SP
 
+
+INSTRUCTION IND
 ================================================================================
 							*z80-instruction-ind*
 IND
 
+
+INSTRUCTION INDR
 ================================================================================
 							*z80-instruction-indr*
 INDR
 
+
+INSTRUCTION INI
 ================================================================================
 							*z80-instruction-ini*
 INI
 
+
+INSTRUCTION INIR
 ================================================================================
 							*z80-instruction-inir*
 INIR
 
+
+INSTRUCTION JP
 ================================================================================
 							*z80-instruction-jp*
 JP nn
@@ -236,6 +355,8 @@ JP PE, nn
 JP PO, nn
 JP Z, nn
 
+
+INSTRUCTION JR
 ================================================================================
 							*z80-instruction-jr*
 JR o
@@ -244,6 +365,8 @@ JR NC, o
 JR NZ, o
 JR Z, o
 
+
+INSTRUCTION LD
 ================================================================================
 							*z80-instruction-ld*
 LD (BC), A
@@ -337,39 +460,57 @@ LD SP, IX
 LD SP, IY
 LD SP, nn
 
+
+INSTRUCTION LDD
 ================================================================================
 							*z80-instruction-ldd*
 LDD
 
+
+INSTRUCTION LDDR
 ================================================================================
 							*z80-instruction-lddr*
 LDDR
 
+
+INSTRUCTION LDI
 ================================================================================
 							*z80-instruction-ldi*
 LDI
 
+
+INSTRUCTION LDIR
 ================================================================================
 							*z80-instruction-ldir*
 LDIR
 
+
+INSTRUCTION MULUB
 ================================================================================
 							*z80-instruction-mulub*
 MULUB A, r
 
+
+INSTRUCTION MULUW
 ================================================================================
 							*z80-instruction-muluw*
 MULUW HL, BC
 MULUW HL, SP
 
+
+INSTRUCTION NEG
 ================================================================================
 							*z80-instruction-neg*
 NEG
 
+
+INSTRUCTION NOP
 ================================================================================
 							*z80-instruction-nop*
 NOP
 
+
+INSTRUCTION OP
 ================================================================================
 							*z80-instruction-or*
 OR (HL)
@@ -380,14 +521,20 @@ OR r
 OR IXp
 OR IYq
 
+
+INSTRUCTION OTDR
 ================================================================================
 							*z80-instruction-otdr*
 OTDR
 
+
+INSTRUCTION OTIR
 ================================================================================
 							*z80-instruction-otir*
 OTIR
 
+
+INSTRUCTION OUT
 ================================================================================
 							*z80-instruction-out*
 OUT (C), A
@@ -399,14 +546,20 @@ OUT (C), H
 OUT (C), L
 OUT (n), A
 
+
+INSTRUCTION OUTD
 ================================================================================
 							*z80-instruction-outd*
 OUTD
 
+
+INSTRUCTION OUTI
 ================================================================================
 							*z80-instruction-outi*
 OUTI
 
+
+INSTRUCTION POP
 ================================================================================
 							*z80-instruction-pop*
 POP AF
@@ -416,6 +569,8 @@ POP HL
 POP IX
 POP IY
 
+
+INSTRUCTION PUSH
 ================================================================================
 							*z80-instruction-push*
 PUSH AF
@@ -425,6 +580,8 @@ PUSH HL
 PUSH IX
 PUSH IY
 
+
+INSTRUCTION RES
 ================================================================================
 							*z80-instruction-res*
 RES b, (HL)
@@ -432,6 +589,8 @@ RES b, (IX + o)
 RES b, (IY + o)
 RES b, r
 
+
+INSTRUCTION RET
 ================================================================================
 							*z80-instruction-ret*
 RET
@@ -444,14 +603,20 @@ RET PE
 RET PO
 RET Z
 
+
+INSTRUCTION RETI
 ================================================================================
 							*z80-instruction-reti*
 RETI
 
+
+INSTRUCTION RETN
 ================================================================================
 							*z80-instruction-retn*
 RETN
 
+
+INSTRUCTION RL
 ================================================================================
 							*z80-instruction-rl*
 RL (HL)
@@ -459,10 +624,14 @@ RL (IX + o)
 RL (IY + o)
 RL r
 
+
+INSTRUCTION RLA
 ================================================================================
 							*z80-instruction-rla*
 RLA
 
+
+INSTRUCTION RLC
 ================================================================================
 							*z80-instruction-rlc*
 RLC (HL)
@@ -470,14 +639,20 @@ RLC (IX + o)
 RLC (IY + o)
 RLC r
 
+
+INSTRUCTION RLCA
 ================================================================================
 							*z80-instruction-rlca*
 RLCA
 
+
+INSTRUCTION RLD
 ================================================================================
 							*z80-instruction-rld*
 RLD
 
+
+INSTRUCTION RR
 ================================================================================
 							*z80-instruction-rr*
 RR (HL)
@@ -485,10 +660,14 @@ RR (IX + o)
 RR (IY + o)
 RR r
 
+
+INSTRUCTION RRA
 ================================================================================
 							*z80-instruction-rra*
 RRA
 
+
+INSTRUCTION RRC
 ================================================================================
 							*z80-instruction-rrc*
 RRC (HL)
@@ -496,14 +675,20 @@ RRC (IX + o)
 RRC (IY + o)
 RRC r
 
+
+INSTRUCTION RRCA
 ================================================================================
 							*z80-instruction-rrca*
 RRCA
 
+
+INSTRUCTION RRD
 ================================================================================
 							*z80-instruction-rrd*
 RRD
 
+
+INSTRUCTION RST
 ================================================================================
 							*z80-instruction-rst*
 RST 0
@@ -515,6 +700,8 @@ RST 28H
 RST 30H
 RST 38H
 
+
+INSTRUCTION SBC
 ================================================================================
 							*z80-instruction-sbc*
 SBC A, (HL)
@@ -529,10 +716,14 @@ SBC HL, DE
 SBC HL, HL
 SBC HL, SP
 
+
+INSTRUCTION SCF
 ================================================================================
 							*z80-instruction-scf*
 SCF
 
+
+INSTRUCTION SET
 ================================================================================
 							*z80-instruction-set*
 SET b, (HL)
@@ -540,6 +731,8 @@ SET b, (IX + o)
 SET b, (IY + o)
 SET b, r
 
+
+INSTRUCTION SLA
 ================================================================================
 							*z80-instruction-sla*
 SLA (HL)
@@ -547,6 +740,8 @@ SLA (IX + o)
 SLA (IY + o)
 SLA r
 
+
+INSTRUCTION SRA
 ================================================================================
 							*z80-instruction-sra*
 SRA (HL)
@@ -554,6 +749,8 @@ SRA (IX + o)
 SRA (IY + o)
 SRA r
 
+
+INSTRUCTION SRL
 ================================================================================
 							*z80-instruction-srl*
 SRL (HL)
@@ -561,6 +758,8 @@ SRL (IX + o)
 SRL (IY + o)
 SRL r
 
+
+INSTRUCTION SUB
 ================================================================================
 							*z80-instruction-sub*
 SUB (HL)
@@ -571,6 +770,8 @@ SUB r
 SUB IXp
 SUB IYq
 
+
+INSTRUCTION XOR
 ================================================================================
 							*z80-instruction-xor*
 XOR (HL)

@@ -1,4 +1,6 @@
 z80-docs	z80-docs.txt /*z80-docs*
+z80-general-registers	z80-docs.txt /*z80-general-registers*
+z80-special-registers	z80-docs.txt /*z80-special-registers*
 z80-registers	z80-docs.txt /*z80-registers*
 z80-instructions	z80-docs.txt /*z80-instructions*
 z80-instruction-adc	z80-docs.txt /*z80-instruction-adc*
