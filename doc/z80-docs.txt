@@ -215,25 +215,59 @@ CP IYq
 INSTRUCTION CPD
 ================================================================================
 							*z80-instruction-cpd*
-CPD
+The "Compare Decrement" (CPD) instruction.
+
+CPD			    Compare content from address in HL w Accumulator
+			    Then decrement address in HL
+			    Then decrement value in register pair BC
+			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
 
 
 INSTRUCTION CPDR
 ================================================================================
 							*z80-instruction-cpdr*
-CPDR
+The "Compare Decrement Repeat" (CPDR) instruction.
+
+CPDR			    Compare content from address in HL w Accumulator
+			    Then decrement address in HL
+			    Then decrement value in register pair BC
+			    Repeat above until value in BC is 0
+			    For BC != 0 and A != (HL):
+			    MC: 5   TS: 21(4+4+3+5+5)	    ET: 5.25
+			    For BC == 0 and A == (HL):
+			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64Kb if no match is found.
 
 
 INSTRUCTION CPI
 ================================================================================
 							*z80-instruction-cpi*
-CPI
+The "Compare Increment" (CPI) instruction.
+
+CPI			    Compare content from address in HL w Accumulator
+			    Then increment address in HL
+			    Then decrement value in register pair BC
+			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
 
 
 INSTRUCTION CPIR
 ================================================================================
 							*z80-instruction-cpir*
-CPIR
+The "Compare Increment Repeat" (CPIR) instruction.
+
+CPIR			    Compare content from address in HL w Accumulator
+			    Then increment address in HL
+			    Then decrement value in register pair BC
+			    Then repeat above until value in BC is 0
+			    For BC != 0 and A != (HL):
+			    MC: 5   TS: 21(4+4+3+5+5)	    ET: 5.25
+			    For BC == 0 and A == (HL):
+			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64Kb if no match is found.
 
 
 INSTRUCTION CPL
@@ -292,17 +326,33 @@ EI
 INSTRUCTION EX
 ================================================================================
 							*z80-instruction-ex*
-EX (SP), HL
-EX (SP), IX
-EX (SP), IY
-EX AF, AF'
-EX DE, HL
+The "Exchange" (EX) instruction.
+
+EX (SP), HL		    The content of L is exchanged w content at a. SP
+			    The content of H is exchanged w content at a. SP+1
+			    MC: 5   TS: 19(4+3+4+3+5)	    ET: 4.75
+
+EX (SP), IX		    The content of IXl is exchanged w cont. at a. SP
+			    The content of IXh is exchanged w cont. at a. SP+1
+			    MC: 6   TS: 23(4+4+3+4+3+5)	    ET: 5.75
+
+EX (SP), IY		    The content of IYl is exchanged w cont. at a. SP
+			    The content of IYh is exchanged w cont. at a. SP+1
+			    MC: 6   TS: 23(4+4+3+4+3+5)	    ET: 5.75
+
+EX AF, AF'		    The two-byte contents of AF and AF' are exchanged
+			    MC: 1   TS: 4	ET: 1.00
+
+EX DE, HL		    The two-byte contents of DE and HL are exchanged
+			    MC: 1   TS: 4	ET: 1.00
 
 
 INSTRUCTION EXX
 ================================================================================
 							*z80-instruction-exx*
-EXX
+EXX			    Each two-byte value of BC, DE and HL are exchanged
+			    with BC', DE' and HL' respectively.
+			    MC: 1   TS: 4	ET: 1.00
 
 
 INSTRUCTION HALT
@@ -794,25 +844,92 @@ LD SP, IY		Load two-byte content of IY into register SP
 INSTRUCTION LDD
 ================================================================================
 							*z80-instruction-ldd*
-LDD
+The "Load Decrement" (LDD) instruction.
+
+LDD			Load content from address HL to address in DE
+			Then decrement both addresses in HL and DE
+			Then decrement value in register pair BC
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+Understand the instruction is like the following in C programming language:
+*de = *hl;
+hl--;
+de--;
+bc--;
 
 
 INSTRUCTION LDDR
 ================================================================================
 							*z80-instruction-lddr*
-LDDR
+The "Load Decrement Repeat" (LDDR) instruction.
+
+LDDR			Load content from address HL to address in DE
+			Then decrement both addresses in HL and DE
+			Then decrement value in register pair BC
+			Then repeat above until value in BC is 0
+			When BC != 0:
+			MC: 5	TS: 21(4+4+3+5+5)	ET: 5.25
+			When BC == 0:
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64 Kb.
+
+Understand the instruction is like the following in C programming language:
+do
+{
+    *de = *hl;
+    hl--;
+    de--;
+    bc--;
+}
+while (bc > 0);
 
 
 INSTRUCTION LDI
 ================================================================================
 							*z80-instruction-ldi*
-LDI
+The "Load Increment" (LDI) instruction.
+
+LDI			Load content from address HL to address in DE
+			Then increment both addresses in HL and DE
+			Then decrement value in register pair BC
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+
+Notes:
+Understand the instruction is like the following in C programming language:
+*de = *hl;
+hl++;
+de++;
+bc--;
 
 
 INSTRUCTION LDIR
 ================================================================================
 							*z80-instruction-ldir*
-LDIR
+The "Load Increment Repeat" (LDIR) instruction.
+
+LDIR			Load content from address HL to address in DE
+			Then increment both addresses in HL and DE
+			Then decrement value in BC register pair
+			Then repeat above until value in BC is 0
+			When BC != 0:
+			MC: 5	TS: 21(4+4+3+5+5)	ET: 5.25
+			When BC == 0:
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64Kb.
+
+Understand the instruction is like the following in C programming language:
+do
+{
+    *de = *hl;
+    hl++;
+    de++;
+    bc--;
+}
+while (bc > 0);
 
 
 INSTRUCTION MULUB
@@ -892,23 +1009,49 @@ OUTI
 INSTRUCTION POP
 ================================================================================
 							*z80-instruction-pop*
-POP AF
-POP BC
-POP DE
-POP HL
-POP IX
-POP IY
+The "Pop" (POP) instruction.
+
+POP AF			The top two bytes of ext. mem are popped into AF
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP BC			The top two bytes of ext. mem are popped into BC
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP DE			The top two bytes of ext. mem are popped into DE
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP HL			The top two bytes of ext. mem are popped into HL
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP IX			The top two bytes of ext. mem are popped into IX
+			MC: 4	TS: 14(4+4+3+3)	    ET: 3.50
+
+POP IY			The top two bytes of ext. mem are popped into IY
+			MC: 4	TS: 14(4+4+3+3)	    ET: 3.50
 
 
 INSTRUCTION PUSH
 ================================================================================
 							*z80-instruction-push*
-PUSH AF
-PUSH BC
-PUSH DE
-PUSH HL
-PUSH IX
-PUSH IY
+The "Push" (PUSH) instruction.
+
+PUSH AF			The contents of reg. pair AF are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH BC			The contents of reg. pair BC are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH DE			The contents of reg. pair DE are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH HL			The contents of reg. pair HL are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH IX			The contents of reg. pair IX are pushed to ext. mem
+			MC: 4	TS: 15(4+5+3+3)	    ET: 3.75
+
+PUSH IY			The contents of reg. pair IY are pushed to ext. mem
+			MC: 4	TS: 15(4+5+3+3)	    ET: 3.75
 
 
 INSTRUCTION RES
