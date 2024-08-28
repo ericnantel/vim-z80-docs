@@ -120,16 +120,60 @@ INSTRUCTION ADC
 							*z80-instruction-adc*
 The "Add with Carry" (ADC) instruction.
 
-ADC A, (HL)
-ADC A, (IX + o)
-ADC A, (IY + o)
-ADC A, n
-ADC A, r
+ADC A, (HL)		    Add byte content at addr. HL w Accum. along w CF
+			    Store results in the Accumulator
+			    MC: 2   TS: 7(4+3)	    ET: 1.75
+
+ADC A, (IX + o)		    Add contents at addr. IX + o w Accum. along w CF
+			    Store results in the Accumulator
+			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+
+ADC A, (IY + o)		    Add contents at addr. IY + o w Accum. along w CF
+			    Store results in the Accumulator
+			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+
+ADC A, n		    Add 8-bit integer w Accum. along w Carry Flag
+			    Store results in the Accumulator
+			    MC: 2   TS: 7(4+3)	    ET: 1.75
+
+ADC A, A		    Add reg. A content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADC A, B		    Add reg. B content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADC A, C		    Add reg. C content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADC A, D		    Add reg. D content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADC A, E		    Add reg. E content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADC A, H		    Add reg. H content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADC A, L		    Add reg. L content w Accum. along with Carry Flag
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
 ADC A, IXp
+
 ADC A, IYq
+
 ADC HL, BC
+
 ADC HL, DE
+
 ADC HL, HL
+
 ADC HL, SP
 
 
@@ -138,24 +182,76 @@ INSTRUCTION ADD
 							*z80-instruction-add*
 The "Add" (ADD) instruction.
 
-ADD A, (HL)
-ADD A, (IX + o)
-ADD A, (IY + o)
-ADD A, n
-ADD A, r
+ADD A, (HL)		    Add byte content stored at address in HL w Accum.
+			    Store results in the Accumulator
+			    MC: 2   TS: 7(4+3)	    ET: 1.75
+
+ADD A, (IX + o)		    Add contents stored at address in IX + o w Accum.
+			    Store results in the Accumulator
+			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+
+ADD A, (IY + o)		    Add contents stored at address in IY + o w Accum.
+			    Store results in the Accumulator
+			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+
+ADD A, n		    Add 8-bit integer w Accumulator content
+			    Store results in the Accumulator
+			    MC: 2   TS: 7(4+3)	    ET: 1.75
+
+ADD A, A		    Add register A content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADD A, B		    Add register B content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADD A, C		    Add register C content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADD A, D		    Add register D content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADD A, E		    Add register E content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADD A, H		    Add register H content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
+ADD A, L		    Add register L content w Accumulator content
+			    Store results in the Accumulator
+			    MC: 1   TS: 4	ET: 1.00
+
 ADD A, IXp
+
 ADD A, IYq
+
 ADD HL, BC
+
 ADD HL, DE
+
 ADD HL, HL
+
 ADD HL, SP
+
 ADD IX, BC
+
 ADD IX, DE
+
 ADD IX, IX
+
 ADD IX, SP
+
 ADD IY, BC
+
 ADD IY, DE
+
 ADD IY, IY
+
 ADD IY, SP
 
 
@@ -350,6 +446,8 @@ EX DE, HL		    The two-byte contents of DE and HL are exchanged
 INSTRUCTION EXX
 ================================================================================
 							*z80-instruction-exx*
+The "Exchange Shadow Pairs" (EXX) instruction.
+
 EXX			    Each two-byte value of BC, DE and HL are exchanged
 			    with BC', DE' and HL' respectively.
 			    MC: 1   TS: 4	ET: 1.00
@@ -1177,16 +1275,62 @@ RST 38H
 INSTRUCTION SBC
 ================================================================================
 							*z80-instruction-sbc*
-SBC A, (HL)
-SBC A, (IX + o)
-SBC A, (IY + o)
-SBC A, n
-SBC A, r
+The "Subtract with Carry" (SBC) instruction.
+
+SBC A, (HL)		Subtract byte content at addr. in HL along w CF from A
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SBC A, (IX + o)		Subtract contents at addr. IX + o along w CF from Acc.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SBC A, (IY + o)		Subtract contents at addr. IY + o along w CF from Acc.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SBC A, n		Subtract 8-bit integer along w Carry Flag from Accum.
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SBC A, A		Subtract reg. A content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, B		Subtract reg. B content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, C		Subtract reg. C content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, D		Subtract reg. D content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, E		Subtract reg. E content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, H		Subtract reg. H content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, L		Subtract reg. L content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
 SBC A, IXp
+
 SBC A, IYq
+
 SBC HL, BC
+
 SBC HL, DE
+
 SBC HL, HL
+
 SBC HL, SP
 
 
@@ -1235,12 +1379,54 @@ SRL r
 INSTRUCTION SUB
 ================================================================================
 							*z80-instruction-sub*
-SUB (HL)
-SUB (IX + o)
-SUB (IY + o)
-SUB n
-SUB r
+The "Subtract" (SUB) instruction.
+
+SUB (HL)		Subtract byte content stored at addr. in HL from Accu.
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SUB (IX + o)		Subtract contents stored at addr. IX + o from Accum.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SUB (IY + o)		Subtract contents stored at addr. IY + o from Accum.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SUB n			Subtract 8-bit integer from Accumulator content
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SUB A			Subtract reg. A content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB B			Subtract reg. B content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB C			Subtract reg. C content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB D			Subtract reg. D content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB E			Subtract reg. E content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB H			Subtract reg. H content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB L			Subtract reg. L content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
 SUB IXp
+
 SUB IYq
 
 
