@@ -120,49 +120,49 @@ INSTRUCTION ADC
 							*z80-instruction-adc*
 The "Add with Carry" (ADC) instruction.
 
-ADC A, (HL)		    Add byte content at addr. HL w Accum. along w CF
-			    Store results in the Accumulator
-			    MC: 2   TS: 7(4+3)	    ET: 1.75
+ADC A, (HL)		Add byte content at addr. HL w Accum. along w CF
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
 
-ADC A, (IX + o)		    Add contents at addr. IX + o w Accum. along w CF
-			    Store results in the Accumulator
-			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+ADC A, (IX + o)		Add contents at addr. IX + o w Accum. along w CF
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
 
-ADC A, (IY + o)		    Add contents at addr. IY + o w Accum. along w CF
-			    Store results in the Accumulator
-			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+ADC A, (IY + o)		Add contents at addr. IY + o w Accum. along w CF
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
 
-ADC A, n		    Add 8-bit integer w Accum. along w Carry Flag
-			    Store results in the Accumulator
-			    MC: 2   TS: 7(4+3)	    ET: 1.75
+ADC A, n		Add 8-bit integer w Accum. along w Carry Flag
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
 
-ADC A, A		    Add reg. A content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, A		Add reg. A content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADC A, B		    Add reg. B content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, B		Add reg. B content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADC A, C		    Add reg. C content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, C		Add reg. C content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADC A, D		    Add reg. D content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, D		Add reg. D content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADC A, E		    Add reg. E content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, E		Add reg. E content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADC A, H		    Add reg. H content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, H		Add reg. H content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADC A, L		    Add reg. L content w Accum. along with Carry Flag
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADC A, L		Add reg. L content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
 ADC A, IXp
 
@@ -182,49 +182,49 @@ INSTRUCTION ADD
 							*z80-instruction-add*
 The "Add" (ADD) instruction.
 
-ADD A, (HL)		    Add byte content stored at address in HL w Accum.
-			    Store results in the Accumulator
-			    MC: 2   TS: 7(4+3)	    ET: 1.75
+ADD A, (HL)		Add byte content stored at address in HL w Accum.
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
 
-ADD A, (IX + o)		    Add contents stored at address in IX + o w Accum.
-			    Store results in the Accumulator
-			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+ADD A, (IX + o)		Add contents stored at address in IX + o w Accum.
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
 
-ADD A, (IY + o)		    Add contents stored at address in IY + o w Accum.
-			    Store results in the Accumulator
-			    MC: 5   TS: 19(4+4+3+5+3)	    ET: 4.75
+ADD A, (IY + o)		Add contents stored at address in IY + o w Accum.
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
 
-ADD A, n		    Add 8-bit integer w Accumulator content
-			    Store results in the Accumulator
-			    MC: 2   TS: 7(4+3)	    ET: 1.75
+ADD A, n		Add 8-bit integer w Accumulator content
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
 
-ADD A, A		    Add register A content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, A		Add register A content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADD A, B		    Add register B content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, B		Add register B content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADD A, C		    Add register C content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, C		Add register C content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADD A, D		    Add register D content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, D		Add register D content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADD A, E		    Add register E content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, E		Add register E content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADD A, H		    Add register H content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, H		Add register H content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
-ADD A, L		    Add register L content w Accumulator content
-			    Store results in the Accumulator
-			    MC: 1   TS: 4	ET: 1.00
+ADD A, L		Add register L content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
 ADD A, IXp
 
@@ -313,10 +313,10 @@ INSTRUCTION CPD
 							*z80-instruction-cpd*
 The "Compare Decrement" (CPD) instruction.
 
-CPD			    Compare content from address in HL w Accumulator
-			    Then decrement address in HL
-			    Then decrement value in register pair BC
-			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
+CPD			Compare content from address in HL w Accumulator
+			Then decrement address in HL
+			Then decrement value in register pair BC
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
 
 
 INSTRUCTION CPDR
@@ -324,14 +324,14 @@ INSTRUCTION CPDR
 							*z80-instruction-cpdr*
 The "Compare Decrement Repeat" (CPDR) instruction.
 
-CPDR			    Compare content from address in HL w Accumulator
-			    Then decrement address in HL
-			    Then decrement value in register pair BC
-			    Repeat above until value in BC is 0
-			    For BC != 0 and A != (HL):
-			    MC: 5   TS: 21(4+4+3+5+5)	    ET: 5.25
-			    For BC == 0 and A == (HL):
-			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
+CPDR			Compare content from address in HL w Accumulator
+			Then decrement address in HL
+			Then decrement value in register pair BC
+			Repeat above until value in BC is 0
+			For BC != 0 and A != (HL):
+			MC: 5   TS: 21(4+4+3+5+5)	ET: 5.25
+			For BC == 0 and A == (HL):
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
 Notes:
 When value stored in register pair BC is 0 prior to instruction execution,
 the instruction loops through 64Kb if no match is found.
@@ -342,10 +342,10 @@ INSTRUCTION CPI
 							*z80-instruction-cpi*
 The "Compare Increment" (CPI) instruction.
 
-CPI			    Compare content from address in HL w Accumulator
-			    Then increment address in HL
-			    Then decrement value in register pair BC
-			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
+CPI			Compare content from address in HL w Accumulator
+			Then increment address in HL
+			Then decrement value in register pair BC
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
 
 
 INSTRUCTION CPIR
@@ -353,14 +353,14 @@ INSTRUCTION CPIR
 							*z80-instruction-cpir*
 The "Compare Increment Repeat" (CPIR) instruction.
 
-CPIR			    Compare content from address in HL w Accumulator
-			    Then increment address in HL
-			    Then decrement value in register pair BC
-			    Then repeat above until value in BC is 0
-			    For BC != 0 and A != (HL):
-			    MC: 5   TS: 21(4+4+3+5+5)	    ET: 5.25
-			    For BC == 0 and A == (HL):
-			    MC: 4   TS: 16(4+4+3+5)	ET: 4.00
+CPIR			Compare content from address in HL w Accumulator
+			Then increment address in HL
+			Then decrement value in register pair BC
+			Then repeat above until value in BC is 0
+			For BC != 0 and A != (HL):
+			MC: 5   TS: 21(4+4+3+5+5)	ET: 5.25
+			For BC == 0 and A == (HL):
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
 Notes:
 When value stored in register pair BC is 0 prior to instruction execution,
 the instruction loops through 64Kb if no match is found.
@@ -369,7 +369,10 @@ the instruction loops through 64Kb if no match is found.
 INSTRUCTION CPL
 ================================================================================
 							*z80-instruction-cpl*
-CPL
+The "Complement" (CPL) instruction.
+
+CPL			Invert content stored in Accumulator
+			MC: 1   TS: 4	    ET: 1.00
 
 
 INSTRUCTION DAA
@@ -424,23 +427,23 @@ INSTRUCTION EX
 							*z80-instruction-ex*
 The "Exchange" (EX) instruction.
 
-EX (SP), HL		    The content of L is exchanged w content at a. SP
-			    The content of H is exchanged w content at a. SP+1
-			    MC: 5   TS: 19(4+3+4+3+5)	    ET: 4.75
+EX (SP), HL		The content of L is exchanged w content at a. SP
+			The content of H is exchanged w content at a. SP+1
+			MC: 5   TS: 19(4+3+4+3+5)	ET: 4.75
 
-EX (SP), IX		    The content of IXl is exchanged w cont. at a. SP
-			    The content of IXh is exchanged w cont. at a. SP+1
-			    MC: 6   TS: 23(4+4+3+4+3+5)	    ET: 5.75
+EX (SP), IX		The content of IXl is exchanged w cont. at a. SP
+			The content of IXh is exchanged w cont. at a. SP+1
+			MC: 6   TS: 23(4+4+3+4+3+5)	ET: 5.75
 
-EX (SP), IY		    The content of IYl is exchanged w cont. at a. SP
-			    The content of IYh is exchanged w cont. at a. SP+1
-			    MC: 6   TS: 23(4+4+3+4+3+5)	    ET: 5.75
+EX (SP), IY		The content of IYl is exchanged w cont. at a. SP
+			The content of IYh is exchanged w cont. at a. SP+1
+			MC: 6   TS: 23(4+4+3+4+3+5)	ET: 5.75
 
-EX AF, AF'		    The two-byte contents of AF and AF' are exchanged
-			    MC: 1   TS: 4	ET: 1.00
+EX AF, AF'		The two-byte contents of AF and AF' are exchanged
+			MC: 1   TS: 4	    ET: 1.00
 
-EX DE, HL		    The two-byte contents of DE and HL are exchanged
-			    MC: 1   TS: 4	ET: 1.00
+EX DE, HL		The two-byte contents of DE and HL are exchanged
+			MC: 1   TS: 4	    ET: 1.00
 
 
 INSTRUCTION EXX
@@ -448,24 +451,55 @@ INSTRUCTION EXX
 							*z80-instruction-exx*
 The "Exchange Shadow Pairs" (EXX) instruction.
 
-EXX			    Each two-byte value of BC, DE and HL are exchanged
-			    with BC', DE' and HL' respectively.
-			    MC: 1   TS: 4	ET: 1.00
+EXX			Each two-byte value of BC, DE and HL are exchanged
+			with BC', DE' and HL' respectively.
+			MC: 1   TS: 4	    ET: 1.00
 
 
 INSTRUCTION HALT
 ================================================================================
 							*z80-instruction-halt*
-HALT
+The "Halt" (HALT) instruction.
 
+HALT			Suspend CPU operation until an interrupt
+			or reset is received
+			MC: 1	TS: 4	    ET: 1.00
+Notes:
+While the processor is in 'HALT' state, it performs NOP instructions,
+to maintain memory refresh logic.
 
 INSTRUCTION IM
 ================================================================================
 							*z80-instruction-im*
-IM 0
-IM 1
-IM 2
+The "Interrupt Mode" instruction.
 
+IM 0			Set interrupt mode 0
+			In this mode, interrupting device can insert
+			any instruction on the data bus for CPU to exec.
+			The first byte is read during interrupt acknowledge
+			cycle. Subsequent bytes are read in a normal memory
+			read sequence.
+			MC: 2	TS: 8(4+4)	ET: 2.00
+
+IM 1			Set interrupt mode 1
+			In this mode, processor responds to an interrupt
+			by executing a restart at address 0038h
+			Usually os or firmware uses this interrupt mode and
+			holds instructions at that address.
+			MC: 2	TS: 8(4+4)	ET: 2.00
+
+IM 2			Set interrupt mode 2
+			In this mode, processor may jump to a custom
+			address (16bits) defined in a IVT (Interrupt Vector
+			Table). But IVT most-significant byte must be placed
+			in the I register beforehands. The least-significant
+			byte represents the index of that IVT but it could be
+			random. Without going to much into detail, 
+			you might want to create an IVT with 257 addresses
+			and all being set to the same ISR (Interrupt Handler),
+			thus ensuring the routine to be always be called
+			when interrupts are enabled and received.
+			MC: 2	TS: 8(4+4)	ET: 2.00
 
 INSTRUCTION IN
 ================================================================================
@@ -1046,14 +1080,30 @@ MULUW HL, SP
 INSTRUCTION NEG
 ================================================================================
 							*z80-instruction-neg*
-NEG
+The "Negate" (NEG) instruction.
 
+NEG			Negate content stored in Accumulator
+			MC: 2	TS: 8(4+4)	ET: 2.00
+Notes:
+It is same as subtracting the contents of Accumulator from zero.
+Understand this is not an instruction on decimals !
+Let's say we have 0xED or %11101101 or 152 in the Accumulator.
+Then we perform the NEG instruction, which is going to do:
+0x00 - 0xED and because there will be an underflow in this example,
+what will happen is 0xFF - 0xEC, which results to 0x68
+or %01101000 or 104.
 
 INSTRUCTION NOP
 ================================================================================
 							*z80-instruction-nop*
-NOP
+The "No Operation" (NOP) instruction.
 
+NOP			CPU performs no operation during this machine cycle.
+			MC: 1	TS: 4	    ET: 1.00
+Notes:
+This instruction is useful when we need to waste some cpu cycles, before
+fetching data from a port, or as an alternative to HALT instruction which
+waits for an interrupt.
 
 INSTRUCTION OP
 ================================================================================
