@@ -1,0 +1,1494 @@
+*z80-docs.txt* Plugin Docs for Z80 Assembly Programming
+*z80-docs* *vim-z80-docs*
+
+AUTHOR
+================================================================================
+    Eric Nantel
+
+
+TABLE OF CONTENTS
+================================================================================
+
+ 1. Registers ......................................... |z80-registers|
+  1.1. General-Purpose Registers ...................... |z80-general-registers|
+  1.2. Special-Purpose Registers ...................... |z80-special-registers|
+ 2. Instructions ...................................... |z80-instructions|
+
+
+REGISTERS
+================================================================================
+							*z80-registers*
+
+GENERAL-PURPOSE REGISTERS
+================================================================================
+							*z80-general-registers*
+
+     ------- ------- ------- -------
+    |	A   |	F   |	A'  |	F'  |
+     ------- ------- ------- -------
+    |	B   |	C   |	B'  |	C'  |
+     ------- ------- ------- ------
+    |	D   |	E   |	D'  |	E'  |
+     ------- ------- -------  ------
+    |	H   |	L   |	H'  |	L'  |
+     ------- ------- ------- -------
+Composed of 16 individual 8-bit registers separated in 2 sets: main and
+alternate register set. Registers can be use individually as 8-bit registers 
+or in pairs of 16-bit registers as follow:
+AF, BC, DE, HL, AF', BC', DE', HL'
+
+Register A is known as the accumulator register. It can hold results of 8-bit
+arithmetic or logical operations.
+
+Register F is known as the flag register. It holds state from a previous 
+arithmetic or logical operation done with the accumulator.
+    Bit	    7	    6	    5	    4	    3	    2	    1	    0
+    Flag    S	    Z	    X	    H	    X	    P/V	    N	    C
+Flag descriptions:
+    C	    Carry
+    N	    Add/Subtract
+    P/V	    Parity/Overflow
+    H	    Half Carry
+    Z	    Zero
+    S	    Sign
+    X	    Unused
+
+SPECIAL-PURPOSE REGISTERS
+================================================================================
+							*z80-special-registers*
+
+     -------  ------
+    |	I   |	R   |
+     -------  ------
+    |	    IX	    |
+     ---------------
+    |	    IY	    |
+     ---------------
+    |	    SP	    |
+     ---------------
+    |	    PC	    |
+     ---------------
+Composed of 2 individual 8-bit registers and 4 individual 16-bit registers.
+
+Register I is the interrupt page address register.
+
+Register R is the memory refresh register.
+
+Register IX and IY are index registers. They can hold a 16-bit base address.
+
+Register SP is the stack pointer register. It holds the 16-bit address of the
+current top of stack.
+
+Register PC is the program counter register. It holds the 16-bit address of
+the current instruction being fetched.
+
+INSTRUCTIONS
+================================================================================
+							*z80-instructions*
+Notation summary:
+    r		: A main 8-bit registers A, B, C, D, E, H or L; not F
+    r'		: An alternate 8-bit registers A', B', C', D', E', H' or L'
+    (nn)	: Content at address nn
+    (HL)	: Content at address loaded in register pair HL
+    (IX + o)	: Content at address loaded in index register IX + signed offset
+    (IY + o)	: Content at address loaded in index register IY + signed offset
+    n		: A byte unsigned integer expression (0 to 255)
+    nn		: Two bytes unsigned integer expression (0 to 65535)
+    o		: A byte signed integer expression (-128 to +127)
+    b		: 3-bit unsigned integer expression (0 to 7)
+    h		: high-order portion of a register pair or 16-bit register
+    l		: low-order portion of a register pair or 16-bit register
+
+Instruction description:
+    MC		: Machine cycles
+    TS		: T states or clock periods
+    ET		: Execution time (micro-seconds) assuming 4MHz clock
+
+Condition bits affected:
+    Some instructions, will modify the flag register.
+
+Additional Notes:
+    * In the register format, the most-significant bit to the left;
+    and the least-significant bit to the right.
+
+    * In register pairs, the left 8-bit register holds the high-order byte;
+    and the right holds the low-order byte.
+	Ex: HL where H is high; L is low.
+
+INSTRUCTION ADC
+================================================================================
+							*z80-instruction-adc*
+The "Add with Carry" (ADC) instruction.
+
+ADC A, (HL)		Add byte content at addr. HL w Accum. along w CF
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
+
+ADC A, (IX + o)		Add contents at addr. IX + o w Accum. along w CF
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
+
+ADC A, (IY + o)		Add contents at addr. IY + o w Accum. along w CF
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
+
+ADC A, n		Add 8-bit integer w Accum. along w Carry Flag
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
+
+ADC A, A		Add reg. A content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, B		Add reg. B content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, C		Add reg. C content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, D		Add reg. D content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, E		Add reg. E content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, H		Add reg. H content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, L		Add reg. L content w Accum. along with Carry Flag
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADC A, IXp
+
+ADC A, IYq
+
+ADC HL, BC
+
+ADC HL, DE
+
+ADC HL, HL
+
+ADC HL, SP
+
+
+INSTRUCTION ADD
+================================================================================
+							*z80-instruction-add*
+The "Add" (ADD) instruction.
+
+ADD A, (HL)		Add byte content stored at address in HL w Accum.
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
+
+ADD A, (IX + o)		Add contents stored at address in IX + o w Accum.
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
+
+ADD A, (IY + o)		Add contents stored at address in IY + o w Accum.
+			Store results in the Accumulator
+			MC: 5   TS: 19(4+4+3+5+3)	ET: 4.75
+
+ADD A, n		Add 8-bit integer w Accumulator content
+			Store results in the Accumulator
+			MC: 2   TS: 7(4+3)	ET: 1.75
+
+ADD A, A		Add register A content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, B		Add register B content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, C		Add register C content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, D		Add register D content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, E		Add register E content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, H		Add register H content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, L		Add register L content w Accumulator content
+			Store results in the Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+ADD A, IXp
+
+ADD A, IYq
+
+ADD HL, BC
+
+ADD HL, DE
+
+ADD HL, HL
+
+ADD HL, SP
+
+ADD IX, BC
+
+ADD IX, DE
+
+ADD IX, IX
+
+ADD IX, SP
+
+ADD IY, BC
+
+ADD IY, DE
+
+ADD IY, IY
+
+ADD IY, SP
+
+
+INSTRUCTION AND
+================================================================================
+							*z80-instruction-and*
+AND (HL)
+AND (IX + o)
+AND (IY + o)
+AND n
+AND r
+AND IXp
+AND IYq
+
+
+INSTRUCTION BIT
+================================================================================
+							*z80-instruction-bit*
+BIT b, (HL)
+BIT b, (IX + o)
+BIT b, (IY + o)
+BIT b, r
+
+
+INSTRUCTION CALL
+================================================================================
+							*z80-instruction-call*
+CALL nn
+CALL C, nn
+CALL M, nn
+CALL NC, nn
+CALL NZ, nn
+CALL P, nn
+CALL PE, nn
+CALL PO, nn
+CALL Z, nn
+
+
+INSTRUCTION CCF
+================================================================================
+							*z80-instruction-ccf*
+CCF
+
+
+INSTRUCTION CP
+================================================================================
+							*z80-instruction-cp*
+CP (HL)
+CP (IX + o)
+CP (IY + o)
+CP n
+CP r
+CP IXp
+CP IYq
+
+
+INSTRUCTION CPD
+================================================================================
+							*z80-instruction-cpd*
+The "Compare Decrement" (CPD) instruction.
+
+CPD			Compare content from address in HL w Accumulator
+			Then decrement address in HL
+			Then decrement value in register pair BC
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
+
+
+INSTRUCTION CPDR
+================================================================================
+							*z80-instruction-cpdr*
+The "Compare Decrement Repeat" (CPDR) instruction.
+
+CPDR			Compare content from address in HL w Accumulator
+			Then decrement address in HL
+			Then decrement value in register pair BC
+			Repeat above until value in BC is 0
+			For BC != 0 and A != (HL):
+			MC: 5   TS: 21(4+4+3+5+5)	ET: 5.25
+			For BC == 0 and A == (HL):
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64Kb if no match is found.
+
+
+INSTRUCTION CPI
+================================================================================
+							*z80-instruction-cpi*
+The "Compare Increment" (CPI) instruction.
+
+CPI			Compare content from address in HL w Accumulator
+			Then increment address in HL
+			Then decrement value in register pair BC
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
+
+
+INSTRUCTION CPIR
+================================================================================
+							*z80-instruction-cpir*
+The "Compare Increment Repeat" (CPIR) instruction.
+
+CPIR			Compare content from address in HL w Accumulator
+			Then increment address in HL
+			Then decrement value in register pair BC
+			Then repeat above until value in BC is 0
+			For BC != 0 and A != (HL):
+			MC: 5   TS: 21(4+4+3+5+5)	ET: 5.25
+			For BC == 0 and A == (HL):
+			MC: 4   TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64Kb if no match is found.
+
+
+INSTRUCTION CPL
+================================================================================
+							*z80-instruction-cpl*
+The "Complement" (CPL) instruction.
+
+CPL			Invert content stored in Accumulator
+			MC: 1   TS: 4	    ET: 1.00
+
+
+INSTRUCTION DAA
+================================================================================
+							*z80-instruction-daa*
+DAA
+
+
+INSTRUCTION DEC
+================================================================================
+							*z80-instruction-dec*
+DEC (HL)
+DEC (IX + o)
+DEC (IY + o)
+DEC A
+DEC B
+DEC BC
+DEC C
+DEC D
+DEC DE
+DEC E
+DEC H
+DEC HL
+DEC IX
+DEC IY
+DEC IXp
+DEC IYq
+DEC L
+DEC SP
+
+
+INSTRUCTION DI
+================================================================================
+							*z80-instruction-di*
+DI
+
+
+INSTRUCTION DJNZ
+================================================================================
+							*z80-instruction-djnz*
+DJNZ o
+
+
+INSTRUCTION EI
+================================================================================
+							*z80-instruction-ei*
+EI
+
+
+INSTRUCTION EX
+================================================================================
+							*z80-instruction-ex*
+The "Exchange" (EX) instruction.
+
+EX (SP), HL		The content of L is exchanged w content at a. SP
+			The content of H is exchanged w content at a. SP+1
+			MC: 5   TS: 19(4+3+4+3+5)	ET: 4.75
+
+EX (SP), IX		The content of IXl is exchanged w cont. at a. SP
+			The content of IXh is exchanged w cont. at a. SP+1
+			MC: 6   TS: 23(4+4+3+4+3+5)	ET: 5.75
+
+EX (SP), IY		The content of IYl is exchanged w cont. at a. SP
+			The content of IYh is exchanged w cont. at a. SP+1
+			MC: 6   TS: 23(4+4+3+4+3+5)	ET: 5.75
+
+EX AF, AF'		The two-byte contents of AF and AF' are exchanged
+			MC: 1   TS: 4	    ET: 1.00
+
+EX DE, HL		The two-byte contents of DE and HL are exchanged
+			MC: 1   TS: 4	    ET: 1.00
+
+
+INSTRUCTION EXX
+================================================================================
+							*z80-instruction-exx*
+The "Exchange Shadow Pairs" (EXX) instruction.
+
+EXX			Each two-byte value of BC, DE and HL are exchanged
+			with BC', DE' and HL' respectively.
+			MC: 1   TS: 4	    ET: 1.00
+
+
+INSTRUCTION HALT
+================================================================================
+							*z80-instruction-halt*
+The "Halt" (HALT) instruction.
+
+HALT			Suspend CPU operation until an interrupt
+			or reset is received
+			MC: 1	TS: 4	    ET: 1.00
+Notes:
+While the processor is in 'HALT' state, it performs NOP instructions,
+to maintain memory refresh logic.
+
+INSTRUCTION IM
+================================================================================
+							*z80-instruction-im*
+The "Interrupt Mode" instruction.
+
+IM 0			Set interrupt mode 0
+			In this mode, interrupting device can insert
+			any instruction on the data bus for CPU to exec.
+			The first byte is read during interrupt acknowledge
+			cycle. Subsequent bytes are read in a normal memory
+			read sequence.
+			MC: 2	TS: 8(4+4)	ET: 2.00
+
+IM 1			Set interrupt mode 1
+			In this mode, processor responds to an interrupt
+			by executing a restart at address 0038h
+			Usually os or firmware uses this interrupt mode and
+			holds instructions at that address.
+			MC: 2	TS: 8(4+4)	ET: 2.00
+
+IM 2			Set interrupt mode 2
+			In this mode, processor may jump to a custom
+			address (16bits) defined in a IVT (Interrupt Vector
+			Table). But IVT most-significant byte must be placed
+			in the I register beforehands. The least-significant
+			byte represents the index of that IVT but it could be
+			random. Without going to much into detail, 
+			you might want to create an IVT with 257 addresses
+			and all being set to the same ISR (Interrupt Handler),
+			thus ensuring the routine to be always be called
+			when interrupts are enabled and received.
+			MC: 2	TS: 8(4+4)	ET: 2.00
+
+INSTRUCTION IN
+================================================================================
+							*z80-instruction-in*
+IN A, (C)
+IN A, (n)
+IN B, (C)
+IN C, (C)
+IN D, (C)
+IN E, (C)
+IN H, (C)
+IN L, (C)
+IN F, (C)
+
+
+INSTRUCTION INC
+================================================================================
+							*z80-instruction-inc*
+INC (HL)
+INC (IX + o)
+INC (IY + o)
+INC A
+INC B
+INC BC
+INC C
+INC D
+INC DE
+INC E
+INC H
+INC HL
+INC IX
+INC IY
+INC IXp
+INC IYq
+INC L
+INC SP
+
+
+INSTRUCTION IND
+================================================================================
+							*z80-instruction-ind*
+IND
+
+
+INSTRUCTION INDR
+================================================================================
+							*z80-instruction-indr*
+INDR
+
+
+INSTRUCTION INI
+================================================================================
+							*z80-instruction-ini*
+INI
+
+
+INSTRUCTION INIR
+================================================================================
+							*z80-instruction-inir*
+INIR
+
+
+INSTRUCTION JP
+================================================================================
+							*z80-instruction-jp*
+JP nn
+JP (HL)
+JP (IX)
+JP (IY)
+JP C, nn
+JP M, nn
+JP NC, nn
+JP NZ, nn
+JP P, nn
+JP PE, nn
+JP PO, nn
+JP Z, nn
+
+
+INSTRUCTION JR
+================================================================================
+							*z80-instruction-jr*
+JR o
+JR C, o
+JR NC, o
+JR NZ, o
+JR Z, o
+
+
+INSTRUCTION LD
+================================================================================
+							*z80-instruction-ld*
+The "Load" (LD) instruction.
+
+LD r, r'		Load content of alternate register to main counterpart
+			MC: 1	TS: 4	    ET: 1.0
+
+LD (BC), A		Load content of Accumulator at address stored in BC
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (DE), A		Load content of Accumulator at address stored in DE
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), n		Load 8-bit integer at address stored in HL
+			MC: 3	TS: 10(4+3+3)	ET: 2.50
+
+LD (HL), A		Load content of register A at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), B		Load content of register B at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), C		Load content of register C at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), D		Load content of register D at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), E		Load content of register E at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), H		Load content of register H at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (HL), L		Load content of register L at address stored in HL
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD (IX + o), n		Load 8-bit integer at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), A		Load content of register A at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), B		Load content of register B at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), C		Load content of register C at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), D		Load content of register D at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), E		Load content of register E at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), H		Load content of register H at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IX + o), L		Load content of register L at address stored in IX + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), n		Load 8-bit integer at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD (IY + o), A		Load content of register A at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), B		Load content of register B at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), C		Load content of register C at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), D		Load content of register D at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), E		Load content of register E at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), H		Load content of register H at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (IY + o), L		Load content of register L at address stored in IY + o
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD (nn), A		Load content of Accumulator at address nn
+			MC: 4	TS: 13(4+3+3+3)	    ET: 3.25
+
+LD (nn), BC		Load content of B at address nn+1 and C at address nn
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD (nn), DE		Load content of D at address nn+1 and E at address nn
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD (nn), HL		Load content of H at address nn+1 and L at address nn
+			MC: 5	TS: 16(4+3+3+3+3)	ET: 4.00
+
+LD (nn), IX		Load content of IXh at address nn+1 and IXl at addr. nn
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD (nn), IY		Load content of IYh at address nn+1 and IYl at addr. nn
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD (nn), SP		Load content of SPh at address nn+1 and SPl at addr. nn
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD A, (BC)		Load content at address stored in BC into Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD A, (DE)		Load content at address stored in DE into Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD A, (HL)		Load content at address stored in HL into register A
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD A, (IX + o)		Load content at address stored in IX + o into reg. A
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD A, (IY + o)		Load content at address stored in IY + o into reg. A
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD A, (nn)		Load content at address nn into register A
+			MC: 4	TS: 13(4+3+3+3)	    ET: 3.25
+
+LD A, n			Load 8-bit integer n into register A
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD A, B			Load content of register B into register A
+			MC: 1	TS: 4	    ET: 1.0
+
+LD A, C			Load content of register C into register A
+			MC: 1	TS: 4	    ET: 1.0
+
+LD A, D			Load content of register D into register A
+			MC: 1	TS: 4	    ET: 1.0
+
+LD A, E			Load content of register E into register A
+			MC: 1	TS: 4	    ET: 1.0
+
+LD A, H			Load content of register H into register A
+			MC: 1	TS: 4	    ET: 1.0
+
+LD A, L			Load content of register L into register A
+			MC: 1	TS: 4	    ET: 1.0
+
+LD A, I			Load content of interrupt vector reg. I into Accumulator
+			MC: 2	TS: 9(4+5)	ET: 2.25
+
+LD A, R			Load content of memory refresh reg. R into Accumulator
+			MC: 2	TS: 9(4+5)	ET: 2.25
+
+LD B, (HL)		Load content at address stored in HL into register B
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD B, (IX + o)		Load content at address stored in IX + o into reg. B
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD B, (IY + o)		Load content at address stored in IY + o into reg. B
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD B, n			Load 8-bit integer n into register B
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD B, A			Load content of register A into register B
+			MC: 1	TS: 4	    ET: 1.0
+
+LD B, C			Load content of register C into register B
+			MC: 1	TS: 4	    ET: 1.0
+
+LD B, D			Load content of register D into register B
+			MC: 1	TS: 4	    ET: 1.0
+
+LD B, E			Load content of register E into register B
+			MC: 1	TS: 4	    ET: 1.0
+
+LD B, H			Load content of register H into register B
+			MC: 1	TS: 4	    ET: 1.0
+
+LD B, L			Load content of register L into register B
+			MC: 1	TS: 4	    ET: 1.0
+
+LD BC, (nn)		Load content at address nn+1 into B and addr. nn into C
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD BC, nn		Load two-byte integer nn into register pair BC
+			MC: 2	TS: 10(4+3+3)	    ET: 2.50
+
+LD C, (HL)		Load content at address stored in HL into register C
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD C, (IX + o)		Load content at address stored in IX + o into reg. C
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD C, (IY + o)		Load content at address stored in IY + o into reg. C
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD C, n			Load 8-bit integer n into register C
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD C, A			Load content of register A into register C
+			MC: 1	TS: 4	    ET: 1.0
+
+LD C, B			Load content of register B into register C
+			MC: 1	TS: 4	    ET: 1.0
+
+LD C, D			Load content of register D into register C
+			MC: 1	TS: 4	    ET: 1.0
+
+LD C, E			Load content of register E into register C
+			MC: 1	TS: 4	    ET: 1.0
+
+LD C, H			Load content of register H into register C
+			MC: 1	TS: 4	    ET: 1.0
+
+LD C, L			Load content of register L into register C
+			MC: 1	TS: 4	    ET: 1.0
+
+LD D, (HL)		Load content at address stored in HL into register D
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD D, (IX + o)		Load content at address stored in IX + o into reg. D
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD D, (IY + o)		Load content at address stored in IY + o into reg. D
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD D, n			Load 8-bit integer n into register D
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD D, A			Load content of register A into register D
+			MC: 1	TS: 4	    ET: 1.0
+
+LD D, B			Load content of register B into register D
+			MC: 1	TS: 4	    ET: 1.0
+
+LD D, C			Load content of register C into register D
+			MC: 1	TS: 4	    ET: 1.0
+
+LD D, E			Load content of register E into register D
+			MC: 1	TS: 4	    ET: 1.0
+
+LD D, H			Load content of register H into register D
+			MC: 1	TS: 4	    ET: 1.0
+
+LD D, L			Load content of register L into register D
+			MC: 1	TS: 4	    ET: 1.0
+
+LD DE, (nn)		Load content at address nn+1 into D and addr. nn into E
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD DE, nn		Load two-byte integer nn into register pair DE
+			MC: 2	TS: 10(4+3+3)	    ET: 2.50
+
+LD E, (HL)		Load content at address stored in HL into register E
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD E, (IX + o)		Load content at address stored in IX + o into reg. E
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD E, (IY + o)		Load content at address stored in IY + o into reg. E
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD E, n			Load 8-bit integer n into register E
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD E, A			Load content of register A into register E
+			MC: 1	TS: 4	    ET: 1.0
+
+LD E, B			Load content of register B into register E
+			MC: 1	TS: 4	    ET: 1.0
+
+LD E, C			Load content of register C into register E
+			MC: 1	TS: 4	    ET: 1.0
+
+LD E, D			Load content of register D into register E
+			MC: 1	TS: 4	    ET: 1.0
+
+LD E, H			Load content of register H into register E
+			MC: 1	TS: 4	    ET: 1.0
+
+LD E, L			Load content of register L into register E
+			MC: 1	TS: 4	    ET: 1.0
+
+LD H, (HL)		Load content at address stored in HL into register H
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD H, (IX + o)		Load content at address stored in IX + o into reg. H
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD H, (IY + o)		Load content at address stored in IY + o into reg. H
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD H, n			Load 8-bit integer n into register H
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD H, A			Load content of register A into register H
+			MC: 1	TS: 4	    ET: 1.0
+
+LD H, B			Load content of register B into register H
+			MC: 1	TS: 4	    ET: 1.0
+
+LD H, C			Load content of register C into register H
+			MC: 1	TS: 4	    ET: 1.0
+
+LD H, D			Load content of register D into register H
+			MC: 1	TS: 4	    ET: 1.0
+
+LD H, E			Load content of register E into register H
+			MC: 1	TS: 4	    ET: 1.0
+
+LD H, L			Load content of register L into register H
+			MC: 1	TS: 4	    ET: 1.0
+
+LD HL, (nn)		Load content at address nn+1 into H and addr. nn into L
+			MC: 5	TS: 16(4+3+3+3+3)	ET: 4.00
+
+LD HL, nn		Load two-byte integer nn into register pair HL
+			MC: 2	TS: 10(4+3+3)	    ET: 2.50
+
+LD I, A			Load content of Accumulator into interrupt vec. reg. I
+			MC: 2	TS: 9(4+5)	ET: 2.25
+
+LD IX, (nn)		Load content at address nn+1 into IXh and a. nn into IXl
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD IX, nn		Load two-byte integer nn into index register IX
+			MC: 4	TS: 14(4+4+3+3)	    ET: 3.50
+
+LD IY, (nn)		Load content at address nn+1 into IYh and a. nn into IYl
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD IY, nn		Load two-byte integer nn into index register IY
+			MC: 4	TS: 14(4+4+3+3)	    ET: 3.50
+
+LD L, (HL)		Load content at address stored in HL into register L
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD L, (IX + o)		Load content at address stored in IX + o into reg. L
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 2.50
+
+LD L, (IY + o)		Load content at address stored in IY + o into reg. L
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+LD L, n			Load 8-bit integer n into register L
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+LD L, A			Load content of register A into register L
+			MC: 1	TS: 4	    ET: 1.0
+
+LD L, B			Load content of register B into register L
+			MC: 1	TS: 4	    ET: 1.0
+
+LD L, C			Load content of register C into register L
+			MC: 1	TS: 4	    ET: 1.0
+
+LD L, D			Load content of register D into register L
+			MC: 1	TS: 4	    ET: 1.0
+
+LD L, E			Load content of register E into register L
+			MC: 1	TS: 4	    ET: 1.0
+
+LD L, H			Load content of register H into register L
+			MC: 1	TS: 4	    ET: 1.0
+
+LD R, A			Load content of Accumulator into Memory refresh reg. R
+			MC: 2	TS: 9(4+5)	ET: 2.25
+
+LD SP, (nn)		Load content at address nn+1 in SPh and addr. nn in SPl
+			MC: 6	TS: 20(4+4+3+3+3+3)	ET: 5.00
+
+LD SP, nn		Load two-byte integer nn into register SP
+			MC: 2	TS: 10(4+3+3)	    ET: 2.50
+
+LD SP, HL		Load content of HL into register SP
+			MC: 1	TS: 6	    ET: 1.5
+
+LD SP, IX		Load two-byte content of IX into register SP
+			MC: 2	TS: 10(4+6)	ET: 2.50
+
+LD SP, IY		Load two-byte content of IY into register SP
+			MC: 2	TS: 10(4+6)	ET: 2.50
+
+
+INSTRUCTION LDD
+================================================================================
+							*z80-instruction-ldd*
+The "Load Decrement" (LDD) instruction.
+
+LDD			Load content from address HL to address in DE
+			Then decrement both addresses in HL and DE
+			Then decrement value in register pair BC
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+Understand the instruction is like the following in C programming language:
+*de = *hl;
+hl--;
+de--;
+bc--;
+
+
+INSTRUCTION LDDR
+================================================================================
+							*z80-instruction-lddr*
+The "Load Decrement Repeat" (LDDR) instruction.
+
+LDDR			Load content from address HL to address in DE
+			Then decrement both addresses in HL and DE
+			Then decrement value in register pair BC
+			Then repeat above until value in BC is 0
+			When BC != 0:
+			MC: 5	TS: 21(4+4+3+5+5)	ET: 5.25
+			When BC == 0:
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64 Kb.
+
+Understand the instruction is like the following in C programming language:
+do
+{
+    *de = *hl;
+    hl--;
+    de--;
+    bc--;
+}
+while (bc > 0);
+
+
+INSTRUCTION LDI
+================================================================================
+							*z80-instruction-ldi*
+The "Load Increment" (LDI) instruction.
+
+LDI			Load content from address HL to address in DE
+			Then increment both addresses in HL and DE
+			Then decrement value in register pair BC
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+
+Notes:
+Understand the instruction is like the following in C programming language:
+*de = *hl;
+hl++;
+de++;
+bc--;
+
+
+INSTRUCTION LDIR
+================================================================================
+							*z80-instruction-ldir*
+The "Load Increment Repeat" (LDIR) instruction.
+
+LDIR			Load content from address HL to address in DE
+			Then increment both addresses in HL and DE
+			Then decrement value in BC register pair
+			Then repeat above until value in BC is 0
+			When BC != 0:
+			MC: 5	TS: 21(4+4+3+5+5)	ET: 5.25
+			When BC == 0:
+			MC: 4	TS: 16(4+4+3+5)	    ET: 4.00
+Notes:
+When value stored in register pair BC is 0 prior to instruction execution,
+the instruction loops through 64Kb.
+
+Understand the instruction is like the following in C programming language:
+do
+{
+    *de = *hl;
+    hl++;
+    de++;
+    bc--;
+}
+while (bc > 0);
+
+
+INSTRUCTION MULUB
+================================================================================
+							*z80-instruction-mulub*
+MULUB A, r
+
+
+INSTRUCTION MULUW
+================================================================================
+							*z80-instruction-muluw*
+MULUW HL, BC
+MULUW HL, SP
+
+
+INSTRUCTION NEG
+================================================================================
+							*z80-instruction-neg*
+The "Negate" (NEG) instruction.
+
+NEG			Negate content stored in Accumulator
+			MC: 2	TS: 8(4+4)	ET: 2.00
+Notes:
+It is same as subtracting the contents of Accumulator from zero.
+Understand this is not an instruction on decimals !
+Let's say we have 0xED or %11101101 or 152 in the Accumulator.
+Then we perform the NEG instruction, which is going to do:
+0x00 - 0xED and because there will be an underflow in this example,
+what will happen is 0xFF - 0xEC, which results to 0x68
+or %01101000 or 104.
+
+INSTRUCTION NOP
+================================================================================
+							*z80-instruction-nop*
+The "No Operation" (NOP) instruction.
+
+NOP			CPU performs no operation during this machine cycle.
+			MC: 1	TS: 4	    ET: 1.00
+Notes:
+This instruction is useful when we need to waste some cpu cycles, before
+fetching data from a port, or as an alternative to HALT instruction which
+waits for an interrupt.
+
+INSTRUCTION OP
+================================================================================
+							*z80-instruction-or*
+OR (HL)
+OR (IX + o)
+OR (IY + o)
+OR n
+OR r
+OR IXp
+OR IYq
+
+
+INSTRUCTION OTDR
+================================================================================
+							*z80-instruction-otdr*
+OTDR
+
+
+INSTRUCTION OTIR
+================================================================================
+							*z80-instruction-otir*
+OTIR
+
+
+INSTRUCTION OUT
+================================================================================
+							*z80-instruction-out*
+OUT (C), A
+OUT (C), B
+OUT (C), C
+OUT (C), D
+OUT (C), E
+OUT (C), H
+OUT (C), L
+OUT (n), A
+
+
+INSTRUCTION OUTD
+================================================================================
+							*z80-instruction-outd*
+OUTD
+
+
+INSTRUCTION OUTI
+================================================================================
+							*z80-instruction-outi*
+OUTI
+
+
+INSTRUCTION POP
+================================================================================
+							*z80-instruction-pop*
+The "Pop" (POP) instruction.
+
+POP AF			The top two bytes of ext. mem are popped into AF
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP BC			The top two bytes of ext. mem are popped into BC
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP DE			The top two bytes of ext. mem are popped into DE
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP HL			The top two bytes of ext. mem are popped into HL
+			MC: 3	TS: 10(4+3+3)	    ET: 2.50
+
+POP IX			The top two bytes of ext. mem are popped into IX
+			MC: 4	TS: 14(4+4+3+3)	    ET: 3.50
+
+POP IY			The top two bytes of ext. mem are popped into IY
+			MC: 4	TS: 14(4+4+3+3)	    ET: 3.50
+
+
+INSTRUCTION PUSH
+================================================================================
+							*z80-instruction-push*
+The "Push" (PUSH) instruction.
+
+PUSH AF			The contents of reg. pair AF are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH BC			The contents of reg. pair BC are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH DE			The contents of reg. pair DE are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH HL			The contents of reg. pair HL are pushed to ext. mem
+			MC: 3	TS: 11(5+3+3)	    ET: 2.75
+
+PUSH IX			The contents of reg. pair IX are pushed to ext. mem
+			MC: 4	TS: 15(4+5+3+3)	    ET: 3.75
+
+PUSH IY			The contents of reg. pair IY are pushed to ext. mem
+			MC: 4	TS: 15(4+5+3+3)	    ET: 3.75
+
+
+INSTRUCTION RES
+================================================================================
+							*z80-instruction-res*
+RES b, (HL)
+RES b, (IX + o)
+RES b, (IY + o)
+RES b, r
+
+
+INSTRUCTION RET
+================================================================================
+							*z80-instruction-ret*
+RET
+RET C
+RET M
+RET NC
+RET NZ
+RET P
+RET PE
+RET PO
+RET Z
+
+
+INSTRUCTION RETI
+================================================================================
+							*z80-instruction-reti*
+RETI
+
+
+INSTRUCTION RETN
+================================================================================
+							*z80-instruction-retn*
+RETN
+
+
+INSTRUCTION RL
+================================================================================
+							*z80-instruction-rl*
+RL (HL)
+RL (IX + o)
+RL (IY + o)
+RL r
+
+
+INSTRUCTION RLA
+================================================================================
+							*z80-instruction-rla*
+RLA
+
+
+INSTRUCTION RLC
+================================================================================
+							*z80-instruction-rlc*
+RLC (HL)
+RLC (IX + o)
+RLC (IY + o)
+RLC r
+
+
+INSTRUCTION RLCA
+================================================================================
+							*z80-instruction-rlca*
+RLCA
+
+
+INSTRUCTION RLD
+================================================================================
+							*z80-instruction-rld*
+RLD
+
+
+INSTRUCTION RR
+================================================================================
+							*z80-instruction-rr*
+RR (HL)
+RR (IX + o)
+RR (IY + o)
+RR r
+
+
+INSTRUCTION RRA
+================================================================================
+							*z80-instruction-rra*
+RRA
+
+
+INSTRUCTION RRC
+================================================================================
+							*z80-instruction-rrc*
+RRC (HL)
+RRC (IX + o)
+RRC (IY + o)
+RRC r
+
+
+INSTRUCTION RRCA
+================================================================================
+							*z80-instruction-rrca*
+RRCA
+
+
+INSTRUCTION RRD
+================================================================================
+							*z80-instruction-rrd*
+RRD
+
+
+INSTRUCTION RST
+================================================================================
+							*z80-instruction-rst*
+RST 0
+RST 8H
+RST 10H
+RST 18H
+RST 20H
+RST 28H
+RST 30H
+RST 38H
+
+
+INSTRUCTION SBC
+================================================================================
+							*z80-instruction-sbc*
+The "Subtract with Carry" (SBC) instruction.
+
+SBC A, (HL)		Subtract byte content at addr. in HL along w CF from A
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SBC A, (IX + o)		Subtract contents at addr. IX + o along w CF from Acc.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SBC A, (IY + o)		Subtract contents at addr. IY + o along w CF from Acc.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SBC A, n		Subtract 8-bit integer along w Carry Flag from Accum.
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SBC A, A		Subtract reg. A content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, B		Subtract reg. B content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, C		Subtract reg. C content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, D		Subtract reg. D content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, E		Subtract reg. E content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, H		Subtract reg. H content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, L		Subtract reg. L content along w Carry Flag from Acc.
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SBC A, IXp
+
+SBC A, IYq
+
+SBC HL, BC
+
+SBC HL, DE
+
+SBC HL, HL
+
+SBC HL, SP
+
+
+INSTRUCTION SCF
+================================================================================
+							*z80-instruction-scf*
+SCF
+
+
+INSTRUCTION SET
+================================================================================
+							*z80-instruction-set*
+SET b, (HL)
+SET b, (IX + o)
+SET b, (IY + o)
+SET b, r
+
+
+INSTRUCTION SLA
+================================================================================
+							*z80-instruction-sla*
+SLA (HL)
+SLA (IX + o)
+SLA (IY + o)
+SLA r
+
+
+INSTRUCTION SRA
+================================================================================
+							*z80-instruction-sra*
+SRA (HL)
+SRA (IX + o)
+SRA (IY + o)
+SRA r
+
+
+INSTRUCTION SRL
+================================================================================
+							*z80-instruction-srl*
+SRL (HL)
+SRL (IX + o)
+SRL (IY + o)
+SRL r
+
+
+INSTRUCTION SUB
+================================================================================
+							*z80-instruction-sub*
+The "Subtract" (SUB) instruction.
+
+SUB (HL)		Subtract byte content stored at addr. in HL from Accu.
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SUB (IX + o)		Subtract contents stored at addr. IX + o from Accum.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SUB (IY + o)		Subtract contents stored at addr. IY + o from Accum.
+			Store results in the Accumulator
+			MC: 5	TS: 19(4+4+3+5+3)	ET: 4.75
+
+SUB n			Subtract 8-bit integer from Accumulator content
+			Store results in the Accumulator
+			MC: 2	TS: 7(4+3)	ET: 1.75
+
+SUB A			Subtract reg. A content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB B			Subtract reg. B content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB C			Subtract reg. C content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB D			Subtract reg. D content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB E			Subtract reg. E content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB H			Subtract reg. H content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB L			Subtract reg. L content from Accumulator content
+			Store results in the Accumulator
+			MC: 1	TS: 4	    ET: 1.00
+
+SUB IXp
+
+SUB IYq
+
+
+INSTRUCTION XOR
+================================================================================
+							*z80-instruction-xor*
+XOR (HL)
+XOR (IX + o)
+XOR (IY + o)
+XOR n
+XOR r
+XOR IXp
+XOR IYq
+
+vim:tw=80:ts=8:ft=help:norl:
